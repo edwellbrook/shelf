@@ -4,6 +4,7 @@ import Script from "next/script";
 import styles from "../styles/Home.module.css";
 
 import RecordGrid from "../components/RecordGrid";
+import Footer from "../components/Footer";
 
 export default function Home() {
   const records = [
@@ -28,25 +29,7 @@ export default function Home() {
         <RecordGrid records={records} />
       </main>
 
-      <footer id="footer" class="footer">
-        <ul>
-          <li>
-            <a class="rainbow-1" href="/about">
-              About
-            </a>
-          </li>
-          <li>
-            <a class="rainbow-2" href="/acknowledgements">
-              Acknowledgements
-            </a>
-          </li>
-          <li>
-            <a class="rainbow-3" href="https://github.com/barrowclift/shelf">
-              Contribute
-            </a>
-          </li>
-        </ul>
-      </footer>
+      <Footer />
     </div>
   );
 }
