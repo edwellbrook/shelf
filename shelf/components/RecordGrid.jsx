@@ -38,10 +38,8 @@ function useThread(threadKey) {
   };
 }
 
-export default function RecordGrid({ records }) {
-  const { thread, links, isLoading, error } = useThread(
-    "1mw65aa2pIu4rIH9yPwn8SUj6dy"
-  );
+export default function RecordGrid({ threadId }) {
+  const { thread, links, isLoading, error } = useThread(threadId);
 
   if (isLoading) {
     return <RecordGridLoading />;
