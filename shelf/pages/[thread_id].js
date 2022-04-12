@@ -20,7 +20,7 @@ export default function ThreadPage({}) {
         <Script src="/vanilla-tilt.js" />
       </Head>
 
-      <main class="content clearfix">
+      <main className="content clearfix">
         <RecordGrid threadId={threadId} />
       </main>
 

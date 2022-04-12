@@ -15,9 +15,9 @@ export default function AcknowledgementsPage({}) {
           <p>
             Shelf was orginally built as a{" "}
             <a href="https://shelf.barrowclift.me/about">
-              standalone open-source project
+              stand-alone open-source project
             </a>{" "}
-            by <a href="https://twitter.com/@Barrowclift">Marc Barroclift</a>.
+            by <a href="https://twitter.com/@Barrowclift">Marc Barrowclift</a>.
             This project wouldn't exist without his fantastic work and generious
             open-source license.
           </p>
