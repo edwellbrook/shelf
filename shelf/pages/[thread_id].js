@@ -3,8 +3,6 @@ import Image from "next/image";
 import Script from "next/script";
 import { useRouter } from "next/router";
 
-import styles from "../styles/Home.module.css";
-
 import RecordGrid from "../components/RecordGrid";
 import Footer from "../components/Footer";
 
