@@ -4,16 +4,14 @@ import Record from "./Record";
 
 function RecordGridLoading({}) {
   return (
-    <ul>
-      <transition-group name="zoom">
-        <div id="loading-spinner" key="theSpinner">
-          <div class="progress-text">
-            <span>Loading...</span>
-            <div class="spinner"></div>
-          </div>
+    <transition-group name="zoom">
+      <div id="loading-spinner" key="theSpinner">
+        <div class="progress-text">
+          <span>Loading...</span>
+          <div class="spinner"></div>
         </div>
-      </transition-group>
-    </ul>
+      </div>
+    </transition-group>
   );
 }
 

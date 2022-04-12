@@ -6,14 +6,15 @@ import { useRouter } from "next/router";
 import RecordGrid from "../components/RecordGrid";
 import Footer from "../components/Footer";
 
-export default function ThreadPage({}) {
-  const router = useRouter();
-  const { thread_id: threadId } = router.query;
-
+export default function ThreadPage({ threadId }) {
   return (
     <div id="wrap">
       <Head>
         <title>Shelf</title>
+        <link
+          rel="canonical"
+          href={`https://musicthread.app/thread/${threadId}`}
+        />
 
         <Script src="/vanilla-tilt.js" />
       </Head>
@@ -26,3 +27,7 @@ export default function ThreadPage({}) {
     </div>
   );
 }
+
+ThreadPage.getInitialProps = (ctx) => {
+  return { threadId: ctx.query.thread_id };
+};
