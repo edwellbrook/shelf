@@ -40,6 +40,12 @@ body,
   flex-direction: column;
 }
 
+@supports (min-height: 100dvh) {
+  #wrap {
+    min-height: 100dvh;
+  }
+}
+
 .content {
   width: 100%;
   display: block;
@@ -78,11 +84,17 @@ body,
   margin: 1rem;
   text-align: center;
   padding: 2rem 1rem 6rem;
+  color: #666;
 }
 
 #records header h1 {
   font-size: 4rem;
-  color: #666;
+}
+
+@media (prefers-color-scheme: dark) {
+  #records header {
+    color: #ccc;
+  }
 }
 
 #records ul {
@@ -109,7 +121,6 @@ body,
 
 #records header .description {
   margin: 1rem 1rem 0;
-  color: #666;
   line-height: 1.5rem;
   white-space: pre-line;
 }
@@ -120,7 +131,6 @@ body,
 
 #records header span {
   font-weight: 500;
-  color: #666;
 }
 
 @media (max-width: 420px) {
@@ -637,26 +647,18 @@ menu.sub ul a:hover {
   background-color: white;
   font-weight: normal;
   position: relative;
-  margin-top: -28px;
-  margin-bottom: 0;
-  height: 57px;
-  clear: both;
   text-align: center;
-  padding-bottom: 5em;
 }
 #footer ul,
 #footer ul li {
   margin-bottom: 0;
 }
 #footer ul {
-  margin-top: 21px;
 }
 #footer li {
   display: inline-block;
-  margin-left: 1em;
-  margin-right: 1em;
+  padding: 1rem 0.6rem;
   width: auto;
-  margin-bottom: 0;
 }
 
 /* ----- FORMS, BUTTONS, AND LINKS ----- */
@@ -1216,7 +1218,6 @@ button:active,
   }
 
   #footer {
-    margin-top: -29px;
     padding-bottom: 0;
   }
   #footer li {
@@ -1257,10 +1258,6 @@ button:active,
 
   #footer {
     font-size: 0.833em;
-    margin-top: -38px;
-  }
-  #footer ul {
-    margin-top: 19px;
   }
   #footer li {
     margin-left: 2em;
