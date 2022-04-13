@@ -15,7 +15,7 @@ export default function Footer({}) {
           </Link>
         </li>
         <li>
-          <a className="rainbow-3" href="https://github.com/barrowclift/shelf">
+          <a className="rainbow-3" href="https://github.com/edwellbrook/shelf">
             Contribute
           </a>
         </li>

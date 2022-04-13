@@ -3,10 +3,12 @@ import Image from "next/image";
 import Script from "next/script";
 import { useRouter } from "next/router";
 
-import RecordGrid from "../components/RecordGrid";
-import Footer from "../components/Footer";
+import RecordGrid from "@/components/RecordGrid";
+import Footer from "@/components/Footer";
 
 export default function ThreadPage({ threadId }) {
+  const router = useRouter();
+
   return (
     <div id="wrap">
       <Head>
@@ -20,7 +22,7 @@ export default function ThreadPage({ threadId }) {
       </Head>
 
       <main className="content clearfix">
-        <RecordGrid threadId={threadId} />
+        <RecordGrid threadId={threadId} size={router.query.size} />
       </main>
 
       <Footer />

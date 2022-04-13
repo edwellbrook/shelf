@@ -6,9 +6,9 @@ function RecordGridLoading({}) {
   return (
     <transition-group name="zoom">
       <div id="loading-spinner" key="theSpinner">
-        <div class="progress-text">
+        <div className="progress-text">
           <span>Loading...</span>
-          <div class="spinner"></div>
+          <div className="spinner"></div>
         </div>
       </div>
     </transition-group>
@@ -29,20 +29,35 @@ function useThread(threadKey) {
   };
 }
 
-export default function RecordGrid({ threadId }) {
-  const { thread, links, isLoading, error } = useThread(threadId);
+export default function RecordGrid({ threadId, size }) {
+  const { thread, links, isLoading, isError } = useThread(threadId);
 
   if (isLoading) {
     return <RecordGridLoading />;
   }
 
-  if (error) {
+  if (isError) {
     return <span>Error</span>;
   }
 
+  const sizeOptions = {
+    l: "large",
+    xl: "extra_large",
+  };
+  const sizeClass = sizeOptions[size];
+
   return (
-    <div id="records">
-      <ul>
+    <section id="records">
+      <header>
+        <h1 id="thread_title">{thread.title}</h1>
+        <span>by {thread.author.name}</span>
+
+        {thread.description ? (
+          <p className="description">{thread.description}</p>
+        ) : null}
+      </header>
+
+      <ul className={sizeClass}>
         {links.map((link) => (
           <Record
             key={link.key}
@@ -53,6 +68,6 @@ export default function RecordGrid({ threadId }) {
           />
         ))}
       </ul>
-    </div>
+    </section>
   );
 }
