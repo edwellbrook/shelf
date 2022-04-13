@@ -44,7 +44,7 @@ body,
   width: 100%;
   display: block;
   margin: 0 auto;
-  text-align: center;
+  /* text-align: center; */
   margin-top: 2em;
   margin-bottom: 2em;
   flex-grow: 1;
@@ -63,25 +63,103 @@ body,
   margin-top: 0;
 }
 
+#records {
+  justify-content: stretch;
+  max-width: 1400px;
+  margin: 2rem auto;
+}
+
+#records ul {
+  display: grid;
+  /* grid-template-columns: 1fr 1fr; */
+  /* grid-auto-columns: minmax(0, 0.3fr); */
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 1rem;
+  margin: 1rem;
+  padding: 0 !important;
+  align-items: end;
+  justify-content: center;
+}
+
+@media (max-width: 420px) {
+  #records ul {
+    grid-template-columns: repeat(auto-fill, minmax(35%, 0.5fr));
+  }
+}
+
+#loading-spinner {
+  text-align: center;
+}
+
+.record,
+.record a {
+  position: relative;
+}
+
+.record a {
+  display: block;
+}
+
+.record a .wrapper {
+  border-radius: 0.25em;
+  position: relative;
+  display: inline-block;
+}
+
+.wrapper img {
+  max-height: 100%;
+  max-width: 100%;
+  display: block;
+}
+
+/* ----- VANILLA TILT ----- */
+
+.js-tilt-glare-inner {
+  /**
+     * For abnormally sized items (like board games), the glare hover "spills"
+     * beyond the actual item itself to fill the complete square cell the
+     * given item has to display. We can prevent this by making each item an
+     * inline-display element, but this unfortunately breaks the JS tilt glare
+     * size determination, resulting in teeny tiny glare squares.
+     *
+     * To correct this, have it be x2 the size of the item in question. Since
+     * the glare is already overflow:hidden, this is sufficient to achieve the
+     * desired effect.
+     */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  pointer-events: none;
+  background-image: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgb(255, 255, 255) 100%
+  );
+
+  transform: rotate(180deg) translate(-50%, -50%);
+  transform-origin: 0% 0%;
+
+  width: 200% !important;
+  height: 200% !important;
+}
+
+.js-tilt-glare {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
 /* TYPOGRAPHY ----------------------------------------------------------------------- */
 
 /* ----- TYPEFACE ----- */
-@font-face {
-  font-family: "Pangram";
-  src: url("/fonts/Pangram-Regular.otf");
-  font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Pangram";
-  src: url("/fonts/Pangram-Bold.otf");
-  font-weight: 700;
-  font-style: normal;
-}
 html,
 textarea {
-  font-family: "Pangram", "San Francisco", system, -apple-system,
-    BlinkMacSystemFont, helvetica, roboto, segoe ui, arial, sans-serif;
+  font-family: system, -apple-system, BlinkMacSystemFont, helvetica, roboto,
+    segoe ui, arial, sans-serif;
   text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
@@ -98,7 +176,7 @@ menu input {
 
 /* ----- SIZES, WEIGHTS, AND HEIGHTS ----- */
 html {
-  font-size: 14px;
+  font-size: 18px;
 }
 html,
 body {
@@ -388,41 +466,12 @@ menu.sub ul a:hover {
   margin-bottom: 2em;
 }
 .record {
-  width: 42vw;
   display: inline-block;
-  margin: 0.325em 0.73125em;
 }
 .board-game,
 .book {
-  width: 41vw;
   display: inline-block;
   margin: 0.325em 0.73125em;
-}
-.record a .wrapper,
-.record a:active .wrapper,
-.record a:visited .wrapper,
-.record a:focus .wrapper,
-.record .art {
-  max-height: 42vw;
-  max-width: 42vw;
-}
-.board-game a .wrapper,
-.board-game a:active .wrapper,
-.board-game a:visited .wrapper,
-.board-game a:focus .wrapper,
-.book a .wrapper,
-.book a:active .wrapper,
-.book a:visited .wrapper,
-.book a:focus .wrapper,
-.board-game .art,
-.book .art {
-  max-height: 41vw;
-  max-width: 41vw;
-}
-.record a .wrapper,
-.board-game a .wrapper,
-.book a .wrapper {
-  display: inline-block;
 }
 .record .wrapper .center,
 .board-game .wrapper .center,
@@ -435,43 +484,32 @@ menu.sub ul a:hover {
   will-change: transform;
   transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1);
 }
-.record .metadata,
-.board-game .metadata,
-.book .metadata {
+
+.metadata {
   display: inline-block;
-  font-size: 0.833em;
+  font-size: 0.8rem;
   width: 100%;
-}
-.record .metadata {
+  line-height: 1.1rem;
+  padding-top: 0.4rem;
   text-align: left;
 }
-.board-game .metadata,
-.book .metadata {
-  text-align: center;
-}
-.record .metadata .title,
-.record .metadata .artist,
-.board-game .metadata .title,
-.book .metadata .title,
-.book .metadata .author {
+.metadata .title,
+.metadata .artist {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.record .metadata .title,
-.board-game .metadata .title,
-.book .metadata .title {
-  font-weight: bold;
+.metadata .title {
+  font-weight: 500;
 }
+
 .record .metadata .artist,
 .book .metadata .author {
-  font-size: 0.833em;
-  margin-top: -0.75em;
+  font-size: 0.7rem;
 }
 .record .art,
 .board-game .art,
 .book .art {
-  border: 1px solid black;
   border-radius: 0.25em;
   display: block;
   width: auto;
@@ -479,55 +517,7 @@ menu.sub ul a:hover {
 }
 
 /* Experimental 3D entity rendering */
-.box-wrapper {
-  perspective: 44em;
-  perspective-origin: 50% 5.5em;
-}
-.box-faces {
-  position: relative;
-  width: 11em;
-  transform-style: preserve-3d;
-}
-.box-faces p {
-  padding: 40px 0;
-}
-.box-face {
-  outline: 1px solid rgba(0, 0, 0, 0.375);
-  position: absolute;
-  width: 11em;
-  height: 11em;
-  box-shadow: inset 0px 0px 5.5em rgba(255, 255, 255, 0.05);
-}
-.box-face--is-back {
-  transform: translateZ(-5.5em) rotateY(180deg);
-}
-.box-face--is-top {
-  transform: rotateX(-90deg) translateY(-5.5em);
-  transform-origin: top center;
-}
-.box-face--is-bottom {
-  transform: rotateX(90deg) translateY(5.5em);
-  transform-origin: bottom center;
-}
-.box-face--is-right {
-  transform: rotateY(-270deg) translateX(5.5em);
-  transform-origin: top right;
-}
-.box-face--is-left {
-  transform: rotateY(270deg) translateX(-5.5em);
-  transform-origin: center left;
-}
-.box-face--is-front {
-  transform: translateZ(5.5em);
-}
-.box-faces,
-.box-shadow {
-  transform: rotateX(-12deg) rotateY(12deg) translateX(-1em);
-}
-.board-game a:hover .box-faces,
-.board-game a:hover .box-shadow {
-  transform: rotateX(0deg) rotateY(0deg) translateY(1.3em);
-}
+
 .shadow-wrapper {
   perspective: 44em;
   perspective-origin: 50% 5.5em;
@@ -615,38 +605,6 @@ menu.sub ul a:hover {
   margin-right: 1em;
   width: auto;
   margin-bottom: 0;
-}
-
-/* ----- VANILLA TILT ----- */
-
-.js-tilt-glare-inner {
-  /**
-     * For abnormally sized items (like board games), the glare hover "spills"
-     * beyond the actual item itself to fill the complete square cell the
-     * given item has to display. We can prevent this by making each item an
-     * inline-display element, but this unfortunately breaks the JS tilt glare
-     * size determination, resulting in teeny tiny glare squares.
-     *
-     * To correct this, have it be x2 the size of the item in question. Since
-     * the glare is already overflow:hidden, this is sufficient to achieve the
-     * desired effect.
-     */
-  width: 200% !important;
-  height: 200% !important;
-
-  background-image: linear-gradient(
-    0deg,
-    rgba(248, 249, 250, 0) 0%,
-    rgb(248, 249, 250) 100%
-  ) !important;
-}
-.js-tilt-glare {
-  left: 1px !important;
-  height: calc(100% - 2px) !important;
-  top: 1px !important;
-}
-.js-tilt-glare ~ .js-tilt-glare {
-  display: none;
 }
 
 /* ----- FORMS, BUTTONS, AND LINKS ----- */
@@ -997,7 +955,6 @@ menu a {
 .board-game .art,
 .book .art {
   color: transparent;
-  border-color: #ececec;
 }
 .record .shadow,
 .book .shadow,
@@ -1138,15 +1095,10 @@ button:active,
   .record .metadata,
   .board-game .metadata,
   .book .metadata {
-    font-size: 0.75em;
+    /* font-size: 0.75em; */
   }
 }
 @media (max-width: 524px) {
-  .record .wrapper,
-  .board-game .wrapper,
-  .book .wrapper {
-    display: inline;
-  }
   .js-tilt-glare {
     display: none !important;
   }
@@ -1158,50 +1110,6 @@ button:active,
     height: 40px;
     position: relative;
     margin-top: 150px;
-  }
-
-  .record,
-  .board-game,
-  .book {
-    width: 29vw;
-  }
-  .record a .wrapper,
-  .record a:active .wrapper,
-  .record a:visited .wrapper,
-  .record a:focus .wrapper,
-  .board-game a .wrapper,
-  .board-game a:active .wrapper,
-  .board-game a:visited .wrapper,
-  .board-game a:focus .wrapper,
-  .book a .wrapper,
-  .book a:active .wrapper,
-  .book a:visited .wrapper,
-  .book a:focus .wrapper,
-  .record .art,
-  .board-game .art,
-  .book .art {
-    max-height: 29vw;
-    max-width: 29vw;
-  }
-  .record a:hover .art,
-  .board-game a:hover .art,
-  .book a:hover .art,
-  .record a:hover .js-tilt-glare,
-  .board-game a:hover .js-tilt-glare,
-  .book a:hover .js-tilt-glare {
-    transform: scale(1.025);
-  }
-  .board-game a:hover .box-wrapper,
-  .board-game a:hover .metadata {
-    transform: scale(1.075);
-  }
-  .record .metadata,
-  .board-game .metadata,
-  .book .metadata {
-    font-size: 0.75em;
-  }
-  .board-game.threeDBox {
-    margin: 0.325em 0.975em;
   }
 
   menu,
@@ -1265,9 +1173,6 @@ button:active,
   }
 }
 @media (min-width: 700px) {
-  html {
-    font-size: 19px;
-  }
   menu {
     height: auto;
   }
@@ -1298,30 +1203,6 @@ button:active,
     padding-right: 0;
   }
 
-  .record,
-  .board-game,
-  .book {
-    width: 19vw;
-  }
-  .record a .wrapper,
-  .record a:active .wrapper,
-  .record a:visited .wrapper,
-  .record a:focus .wrapper,
-  .board-game a .wrapper,
-  .board-game a:active .wrapper,
-  .board-game a:visited .wrapper,
-  .board-game a:focus .wrapper,
-  .book a .wrapper,
-  .book a:active .wrapper,
-  .book a:visited .wrapper,
-  .book a:focus .wrapper,
-  .record .art,
-  .board-game .art,
-  .book .art {
-    max-height: 19vw;
-    max-width: 19vw;
-  }
-
   #footer {
     font-size: 0.833em;
     margin-top: -38px;
@@ -1344,30 +1225,6 @@ button:active,
   .content ul {
     padding-left: 0.73125em;
     padding-right: 0.73125em;
-  }
-
-  .record,
-  .board-game,
-  .book {
-    width: 11em;
-  }
-  .record a .wrapper,
-  .record a:active .wrapper,
-  .record a:visited .wrapper,
-  .record a:focus .wrapper,
-  .board-game a .wrapper,
-  .board-game a:active .wrapper,
-  .board-game a:visited .wrapper,
-  .board-game a:focus .wrapper,
-  .book a .wrapper,
-  .book a:active .wrapper,
-  .book a:visited .wrapper,
-  .book a:focus .wrapper,
-  .record .art,
-  .board-game .art,
-  .book .art {
-    max-width: 11em;
-    max-height: 11em;
   }
 
   menu input {
