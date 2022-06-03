@@ -48,7 +48,7 @@ export default function Home() {
     return (
         <div id="wrap">
             <Head>
-                <title>Shelf</title>
+                <title>Featured Threads &bull; Shelf</title>
 
                 <Script src="/vanilla-tilt.js" />
             </Head>
