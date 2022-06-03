@@ -34,29 +34,29 @@ function RecordGridLoading({}) {
     )
 }
 
-export default function ThreadPage({ threadId }) {
+export default function ThreadPage({ thread, links, error }) {
     const router = useRouter()
 
-    const { thread, links, isLoading, isError } = useThread(threadId)
+    // const { thread, links, isLoading, isError } = useThread(threadId)
 
-    if (isLoading) {
-        return (
-            <div id="wrap">
-                <Head>
-                    <title>Shelf</title>
-                    <link rel="canonical" href={`https://musicthread.app/thread/${threadId}`} />
-                </Head>
+    //     if (isLoading) {
+    //         return (
+    //             <div id="wrap">
+    //                 <Head>
+    //                     <title>Shelf</title>
+    //                     <link rel="canonical" href={`https://musicthread.app/thread/${threadId}`} />
+    //                 </Head>
+    //
+    //                 <main className="content clearfix">
+    //                     <RecordGridLoading />
+    //                 </main>
+    //
+    //                 <Footer />
+    //             </div>
+    //         )
+    //     }
 
-                <main className="content clearfix">
-                    <RecordGridLoading />
-                </main>
-
-                <Footer />
-            </div>
-        )
-    }
-
-    if (isError) {
+    if (error) {
         return (
             <div id="wrap">
                 <Head>
@@ -76,8 +76,10 @@ export default function ThreadPage({ threadId }) {
     return (
         <div id="wrap">
             <Head>
-                <title>{thread.title} &bulll; Shelf</title>
-                <link rel="canonical" href={`https://musicthread.app/thread/${threadId}`} />
+                <title>
+                    {thread.title} by {thread.author.name} &bull; Shelf
+                </title>
+                <link rel="canonical" href={`https://musicthread.app/thread/${thread.id}`} />
             </Head>
 
             <main className="content clearfix">
@@ -89,6 +91,15 @@ export default function ThreadPage({ threadId }) {
     )
 }
 
-ThreadPage.getInitialProps = (ctx) => {
-    return { threadId: ctx.query.thread_id }
+export async function getServerSideProps(context) {
+    const res = await fetch(`https://musicthread.app/api/v0/thread/${context.query.thread_id}`)
+    const data = await res.json()
+
+    return {
+        props: {
+            thread: data?.thread,
+            links: data?.links,
+            error: data?.error ?? null,
+        },
+    }
 }
