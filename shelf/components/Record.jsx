@@ -1,12 +1,12 @@
-import { useRef, useEffect } from "react";
-import VanillaTilt from "vanilla-tilt";
+import { useRef, useEffect } from "react"
+import VanillaTilt from "vanilla-tilt"
 
 function Tilt({ options, children, ...props }) {
-  const ref = useRef(null);
+  const ref = useRef(null)
 
   useEffect(() => {
-    VanillaTilt.init(ref.current, options);
-  }, []);
+    VanillaTilt.init(ref.current, options)
+  }, [])
 
   return (
     <div className="wrapper">
@@ -18,27 +18,16 @@ function Tilt({ options, children, ...props }) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 export default function Record({ title, artist, artworkURL, discogsURL }) {
   return (
     <li className="record">
       <a href={discogsURL}>
-        <Tilt
-          className="shadow"
-          options={{
-            scale: 1.05,
-            reverse: false,
-            glare: true,
-            "max-glare": 0.5,
-            "glare-prerender": true,
-          }}
-        >
-          <div className="center">
-            <img className="art" src={artworkURL} alt="" />
-          </div>
-        </Tilt>
+        <div className="center">
+          <img className="art" src={artworkURL} alt="" />
+        </div>
 
         <div className="metadata">
           <p className="title">{title}</p>
@@ -46,5 +35,5 @@ export default function Record({ title, artist, artworkURL, discogsURL }) {
         </div>
       </a>
     </li>
-  );
+  )
 }

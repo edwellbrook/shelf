@@ -163,15 +163,18 @@ body,
 }
 
 .record a .wrapper {
-  border-radius: 0.25em;
   position: relative;
   display: inline-block;
 }
 
-.wrapper img {
+.record .art {
   max-height: 100%;
   max-width: 100%;
   display: block;
+  border-radius: 0.25em;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.05), 0 4px 8px rgba(0, 0, 0, 0.05),
+    0 8px 16px rgba(0, 0, 0, 0.05), 0 16px 32px rgba(0, 0, 0, 0.05), 0 32px 64px rgba(0, 0, 0, 0.05);
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 /* ----- VANILLA TILT ----- */
@@ -192,11 +195,7 @@ body,
   top: 50%;
   left: 50%;
   pointer-events: none;
-  background-image: linear-gradient(
-    0deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgb(255, 255, 255) 100%
-  );
+  background-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 100%);
 
   transform: rotate(180deg) translate(-50%, -50%);
   transform-origin: 0% 0%;
@@ -220,8 +219,7 @@ body,
 /* ----- TYPEFACE ----- */
 html,
 textarea {
-  font-family: system, -apple-system, BlinkMacSystemFont, helvetica, roboto,
-    segoe ui, arial, sans-serif;
+  font-family: system, -apple-system, BlinkMacSystemFont, helvetica, roboto, segoe ui, arial, sans-serif;
   text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
@@ -550,6 +548,7 @@ menu.sub ul a:hover {
 .metadata {
   display: inline-block;
   font-size: 0.8rem;
+  font-weight: 500;
   width: 100%;
   line-height: 1.1rem;
   padding-top: 0.4rem;
@@ -561,83 +560,9 @@ menu.sub ul a:hover {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.metadata .title {
-  font-weight: 500;
-}
 
-.record .metadata .artist,
-.book .metadata .author {
+.metadata .artist {
   font-size: 0.7rem;
-}
-.record .art,
-.board-game .art,
-.book .art {
-  border-radius: 0.25em;
-  display: block;
-  width: auto;
-  height: auto;
-}
-
-/* Experimental 3D entity rendering */
-
-.shadow-wrapper {
-  perspective: 44em;
-  perspective-origin: 50% 5.5em;
-}
-.box-shadow {
-  position: relative;
-  width: 11em;
-  transform-style: preserve-3d;
-}
-.box-shadow div {
-  position: absolute;
-  width: 11em;
-  height: 11em;
-  top: 0px;
-  opacity: 0.98;
-  box-shadow: 0px 0px 5.5em #000;
-  transform: rotateX(90deg) translateY(5.5em);
-  transform-origin: bottom center;
-}
-/*https://davidwalsh.name/css-cube*/
-/* Uncomment to have box auto-rotate */
-/*@keyframes spin {
-    from { transform: rotateY(0) rotateX(360deg); }
-    to { transform: rotateY(360deg) rotateX(0); }
-}
-
-.box-faces {
-    animation: spin 10s infinite linear;
-}*/
-/*.box-faces {
-    transform: rotateY(80deg) rotateX(25deg);
-}*/
-
-.threeDBoxes {
-  margin-left: 0.75em;
-}
-.board-game.threeDBox {
-  margin: 0.325em 1em;
-}
-.board-game {
-  margin: 0.325em 0.73125em;
-}
-.shadow-and-box-wrapper {
-  transform: scale(0.875);
-}
-.board-game .metadata {
-  margin-top: 2.75em;
-}
-
-/* ----- COLLECTION STATISTICS ----- */
-
-.stats {
-  text-align: center;
-  margin-bottom: 2em;
-}
-.stats > span {
-  display: inline-block;
-  position: relative;
 }
 
 /* ----- FOOTER ----- */
@@ -944,8 +869,7 @@ button,
   transition: transform 338ms ease;
 }
 .board-game a .metadata {
-  transition: color 0.25s ease, background-color 0.25s ease, border 0.25s ease,
-    transform 338ms ease;
+  transition: color 0.25s ease, background-color 0.25s ease, border 0.25s ease, transform 338ms ease;
 }
 menu input {
   transition: border-color 0.25s ease, background-color 0.25s ease;
@@ -1013,17 +937,15 @@ menu a {
 .record .shadow,
 .book .shadow,
 .board-game .shadow {
-  box-shadow: rgba(0, 0, 0, 0.06) 0px 0px 7.6px,
-    rgba(0, 0, 0, 0.043) 0px 0px 18.3px, rgba(0, 0, 0, 0.035) 0px 0px 34.4px,
-    rgba(0, 0, 0, 0.03) 0px 0px 61.4px, rgba(0, 0, 0, 0.024) 0px 0px 114.9px,
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 0px 7.6px, rgba(0, 0, 0, 0.043) 0px 0px 18.3px,
+    rgba(0, 0, 0, 0.035) 0px 0px 34.4px, rgba(0, 0, 0, 0.03) 0px 0px 61.4px, rgba(0, 0, 0, 0.024) 0px 0px 114.9px,
     rgba(0, 0, 0, 0.016) 0px 0px 275px;
 }
 .record a:hover .shadow,
 .book a:hover .shadow,
 .board-game a:hover .shadow {
-  box-shadow: 0 1.4px 7.6px rgba(0, 0, 0, 0.02),
-    0 3.3px 18.3px rgba(0, 0, 0, 0.028), 0 6.3px 34.4px rgba(0, 0, 0, 0.035),
-    0 11.2px 61.4px rgba(0, 0, 0, 0.042), 0 20.9px 114.9px rgba(0, 0, 0, 0.05),
+  box-shadow: 0 1.4px 7.6px rgba(0, 0, 0, 0.02), 0 3.3px 18.3px rgba(0, 0, 0, 0.028),
+    0 6.3px 34.4px rgba(0, 0, 0, 0.035), 0 11.2px 61.4px rgba(0, 0, 0, 0.042), 0 20.9px 114.9px rgba(0, 0, 0, 0.05),
     0 50px 275px rgba(0, 0, 0, 0.07);
 }
 .record .metadata .artist,
@@ -1067,20 +989,17 @@ button,
 .button {
   color: rgba(255, 255, 255, 1);
   background-color: hsl(210, 7%, 56%); /* HSL(210, 7%, 56%) */
-  box-shadow: inset 0 0.65em 1.3em rgba(255, 255, 255, 0.1875),
-    0 0.43em 0.87em -0.2em hsla(210, 7%, 56%, 0.2);
+  box-shadow: inset 0 0.65em 1.3em rgba(255, 255, 255, 0.1875), 0 0.43em 0.87em -0.2em hsla(210, 7%, 56%, 0.2);
 }
 button:hover,
 .button:hover {
   background-color: hsl(210, 7%, 61%) !important;
-  box-shadow: inset 0 0.65em 1.3em rgba(255, 255, 255, 0.1875),
-    0 0.43em 0.87em -0.2em hsla(210, 7%, 61%, 0.2);
+  box-shadow: inset 0 0.65em 1.3em rgba(255, 255, 255, 0.1875), 0 0.43em 0.87em -0.2em hsla(210, 7%, 61%, 0.2);
 }
 button:active,
 .button:active {
   background-color: hsl(210, 7%, 51%) !important;
-  box-shadow: inset 0 0.65em 1.3em rgba(0, 0, 0, 0.0625),
-    0 0.43em 0.87em -0.2em hsla(210, 7%, 51%, 0.2);
+  box-shadow: inset 0 0.65em 1.3em rgba(0, 0, 0, 0.0625), 0 0.43em 0.87em -0.2em hsla(210, 7%, 51%, 0.2);
 }
 
 /* MISC --------------------------------------------------------------------------- */
@@ -1410,17 +1329,15 @@ button:active,
   .record .shadow,
   .book .shadow,
   .board-game .shadow {
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 0px 7.6px,
-      rgba(0, 0, 0, 0.086) 0px 0px 18.3px, rgba(0, 0, 0, 0.07) 0px 0px 34.4px,
-      rgba(0, 0, 0, 0.06) 0px 0px 61.4px, rgba(0, 0, 0, 0.048) 0px 0px 114.9px,
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 0px 7.6px, rgba(0, 0, 0, 0.086) 0px 0px 18.3px,
+      rgba(0, 0, 0, 0.07) 0px 0px 34.4px, rgba(0, 0, 0, 0.06) 0px 0px 61.4px, rgba(0, 0, 0, 0.048) 0px 0px 114.9px,
       rgba(0, 0, 0, 0.032) 0px 0px 275px;
   }
   .record a:hover .shadow,
   .book a:hover .shadow,
   .board-game a:hover .shadow {
-    box-shadow: 0 1.4px 7.6px rgba(0, 0, 0, 0.04),
-      0 3.3px 18.3px rgba(0, 0, 0, 0.056), 0 6.3px 34.4px rgba(0, 0, 0, 0.07),
-      0 11.2px 61.4px rgba(0, 0, 0, 0.084), 0 20.9px 114.9px rgba(0, 0, 0, 0.1),
+    box-shadow: 0 1.4px 7.6px rgba(0, 0, 0, 0.04), 0 3.3px 18.3px rgba(0, 0, 0, 0.056),
+      0 6.3px 34.4px rgba(0, 0, 0, 0.07), 0 11.2px 61.4px rgba(0, 0, 0, 0.084), 0 20.9px 114.9px rgba(0, 0, 0, 0.1),
       0 50px 275px rgba(0, 0, 0, 0.14);
   }
 }

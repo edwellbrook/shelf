@@ -1,6 +1,6 @@
-import useSWR from "swr";
+import useSWR from "swr"
 
-import Record from "./Record";
+import Record from "./Record"
 
 function RecordGridLoading({}) {
   return (
@@ -12,39 +12,39 @@ function RecordGridLoading({}) {
         </div>
       </div>
     </transition-group>
-  );
+  )
 }
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
+const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
 function useThread(threadKey) {
-  const url = `https://musicthread.app/api/v0/thread/${threadKey}`;
-  const { data, error } = useSWR(url, fetcher);
+  const url = `https://musicthread.app/api/v0/thread/${threadKey}`
+  const { data, error } = useSWR(url, fetcher)
 
   return {
     thread: data?.thread,
     links: data?.links,
     isLoading: !error && !data,
     isError: error,
-  };
+  }
 }
 
 export default function RecordGrid({ threadId, size }) {
-  const { thread, links, isLoading, isError } = useThread(threadId);
+  const { thread, links, isLoading, isError } = useThread(threadId)
 
   if (isLoading) {
-    return <RecordGridLoading />;
+    return <RecordGridLoading />
   }
 
   if (isError) {
-    return <span>Error</span>;
+    return <span>Error</span>
   }
 
   const sizeOptions = {
     l: "large",
     xl: "extra_large",
-  };
-  const sizeClass = sizeOptions[size];
+  }
+  const sizeClass = sizeOptions[size]
 
   return (
     <section id="records">
@@ -52,9 +52,7 @@ export default function RecordGrid({ threadId, size }) {
         <h1 id="thread_title">{thread.title}</h1>
         <span>by {thread.author.name}</span>
 
-        {thread.description ? (
-          <p className="description">{thread.description}</p>
-        ) : null}
+        {thread.description ? <p className="description">{thread.description}</p> : null}
       </header>
 
       <ul className={sizeClass}>
@@ -69,5 +67,5 @@ export default function RecordGrid({ threadId, size }) {
         ))}
       </ul>
     </section>
-  );
+  )
 }
